@@ -235,10 +235,13 @@ int main(void)
     print_truth_table(fcn[i], number_of_bits[i], number_of_inputs[i]); 
     
     puts("\nSum of product:");
-    print_and_save_sop(fcn[i], number_of_bits[i], "sop_task_1.txt");
+	char filename[128];
+	snprintf(filename, sizeof(filename), "sop_task_%d.txt", i+1);
+    print_and_save_sop(fcn[i], number_of_bits[i], filename);
     
     puts("\nProduct of sum:");
-    print_and_save_pos(fcn[i], number_of_bits[i], "pos_task_1.txt");
+	snprintf(filename, sizeof(filename), "pos_task_%d.txt", i+1);
+    print_and_save_pos(fcn[i], number_of_bits[i], filename);
   }
 
   return 0;
