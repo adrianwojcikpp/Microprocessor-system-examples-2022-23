@@ -1,16 +1,42 @@
-### If required call as Administrator:
-# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+#
+# ******************************************************************************
+# * @file    : pos_to_nor.ps
+# * @author  : AW           Adrian.Wojcik@put.poznan.pl
+# * @author  : ChatGPT      https://chat.openai.com/
+# * @version : 1.0
+# * @date    : 14-Mar-2022
+# * @brief   : Intruction #03: script for converting OR/AND PoS to NOR .circ
+# * @note    : If required call as Administrator:
+# *            > Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+# *
+# ******************************************************************************
+#
+function Get-SearchStringForGate {
+    [CmdletBinding()]
+    Param ([Parameter(Mandatory = $true, Position = 0)][string]$GateName)
 
-$InputLogisimFile = '../logisim/pos_task_1.circ'  
+    return [regex]::Escape('<comp lib="1" loc="(') + '(\d+),(\d+)' + [regex]::Escape(')" name="' + $GateName +' Gate"')
+}
+
+# Original input file: 'product of sum' circuit
+$InputLogisimFile = '../logisim/pos_task_1.circ'
+# Result output file: NOR circuit
 $OutputLogisimFile = '../logisim/nor_task_1.circ' 
 
-$CircFileHeaderSize = 53 # lines
+# Read .circ XML file content
+$LogisimFileData = Get-Content $InputLogisimFile 
 
-$LogisimFileData = Get-Content $InputLogisimFile | Select-Object -Skip $CircFileHeaderSize
-$LogisimFileHeader = Get-Content $InputLogisimFile -Head $CircFileHeaderSize
+$ReplaceGateComp = '<comp lib="1" loc="($1,$2)" name="NOR Gate"'
 
-$LogisimFileData = $LogisimFileData.Replace('OR',  'NOR')     
-$LogisimFileData = $LogisimFileData.Replace('NOT', 'NOR')    
-$LogisimFileData = $LogisimFileData.Replace('AND', 'NOR')    
-$LogisimFileHeader | Out-File -encoding ASCII $OutputLogisimFile  
-$LogisimFileData | Out-File -encoding ASCII -Append $OutputLogisimFile  
+# Replace all 'AND' gates
+$SearchGateComp = Get-SearchStringForGate -GateName "AND"
+$LogisimFileData = $LogisimFileData -replace $SearchGateComp, $ReplaceGateComp
+# Replace all 'OR' gates
+$SearchGateComp = Get-SearchStringForGate -GateName "OR"
+$LogisimFileData = $LogisimFileData -replace $SearchGateComp, $ReplaceGateComp
+# Replace all 'NOT' gates
+$SearchGateComp = Get-SearchStringForGate -GateName "NOT"
+$LogisimFileData = $LogisimFileData -replace $SearchGateComp, $ReplaceGateComp
+
+# Save result file
+$LogisimFileData | Out-File -encoding ASCII $OutputLogisimFile  
