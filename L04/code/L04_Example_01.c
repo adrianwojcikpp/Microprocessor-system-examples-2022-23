@@ -16,6 +16,11 @@
 
 /* Define --------------------------------------------------------------------*/
 #define COLORED_CONSOLE 1
+#define TAB_WIDTH 82
+
+/* Global constants ----------------------------------------------------------*/
+/// @ref https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html
+const char tab_sep[TAB_WIDTH+1] = {[0 ... (TAB_WIDTH-1)] = '-', 0}; 
 
 /* Function prototypes -------------------------------------------------------*/
 void uint32_to_binstr(uint32_t num, char* binstr);
@@ -26,11 +31,13 @@ void uint32_to_binstr(uint32_t num, char* binstr);
 #define __binstr(name) name##_binstr
 
 /// @brief Defines buffer of <size> for <name> variable
-#define __binstr_buf(name, size)  char __binstr(name)[size] = {0,};\
-                                  uint32_to_binstr(name, __binstr(name))
+#define __binstr_buf(name, size) \
+  char __binstr(name)[size] = {0,};\
+  uint32_to_binstr(name, __binstr(name))
+
 /// @brief Bitwise operations result table header
-#define __print_tab_header(op_name) printf("[%4s]              | HEX        | DEC        | BIN\n", op_name);\
-                                    puts("----------------------------------------------------------------------------------")
+#define __print_tab_header(op_name) \
+  printf("\n\n[%11s]       | HEX        | DEC        | BIN\n%*s\n", op_name, TAB_WIDTH, tab_sep)
 
 /* Function definitions ------------------------------------------------------*/
 
@@ -46,9 +53,9 @@ void uint32_to_binstr(uint32_t num, char* binstr)
   for(int i = 0; i < 8*sizeof(num); i++)
   {
     #if COLORED_CONSOLE 
-    memcpy(&binstr[i*10], ((1u << i) & num) ? "\033[31m1\033[0m" : "\033[32m0\033[0m", 10);
+    memcpy(&binstr[i*10], ((1u << (8*sizeof(num) - 1 - i)) & num) ? "\033[31m1\033[0m" : "\033[32m0\033[0m", 10);
     #else
-    binstr[i] = ((1u << i) & num) ? '1' : '0';
+    binstr[i] = ((8*sizeof(num) - 1 - i) & num) ? '1' : '0';
     #endif
   }
 }
@@ -59,10 +66,10 @@ void uint32_to_binstr(uint32_t num, char* binstr)
   * @param[in] arg2 Right-hand side argument.
   * @param[in] rslt Operation result.
   * @param[in] op_name   Operation name (4 character string).
-  * @param[in] op_symbol Operation symbol (single character).
+  * @param[in] op_symbol Operation symbol (3 character string).
   * @retval None.
   */
-void print_binary_bitwise_operation(uint32_t arg1, uint32_t arg2, uint32_t rslt, char* op_name, char op_symbol)
+void print_binary_bitwise_operation(uint32_t arg1, uint32_t arg2, uint32_t rslt, char* op_name, char* op_symbol)
 {
   __binstr_buf(arg1, 512);
   __binstr_buf(arg2, 512);
@@ -71,7 +78,7 @@ void print_binary_bitwise_operation(uint32_t arg1, uint32_t arg2, uint32_t rslt,
   __print_tab_header(op_name); 
   printf("ARG #1              : 0x%08x | %10u | 0b%32s\n", arg1, arg1, __binstr(arg1));
   printf("ARG #2              : 0x%08x | %10u | 0b%32s\n", arg2, arg2, __binstr(arg2));
-  printf("(ARG #1) %c (ARG #2) : 0x%08x | %10u | 0b%32s\n\n", op_symbol, rslt, rslt, __binstr(rslt)); 
+  printf("(ARG #1)%3s(ARG #2) : 0x%08x | %10u | 0b%32s\n\n", op_symbol, rslt, rslt, __binstr(rslt)); 
 }
 
 /**
@@ -79,17 +86,17 @@ void print_binary_bitwise_operation(uint32_t arg1, uint32_t arg2, uint32_t rslt,
   * @param[in] arg  Right-hand side argument
   * @param[in] rslt Operation result
   * @param[in] op_name   Operation name (4 character string).
-  * @param[in] op_symbol Operation symbol (single character).
+  * @param[in] op_symbol Operation symbol (3 character string).
   * @retval None 
   */
-void print_unary_bitwise_operation(uint32_t arg, uint32_t rslt, char* op_name, char op_symbol)
+void print_unary_bitwise_operation(uint32_t arg, uint32_t rslt, char* op_name, char* op_symbol)
 {
   __binstr_buf(arg, 512);
   __binstr_buf(rslt, 512);
 
   __print_tab_header(op_name); 
   printf("ARG #1              : 0x%08x | %10u | 0b%32s\n", arg, arg, __binstr(arg));
-  printf("%c(ARG #1)           : 0x%08x | %10u | 0b%32s\n\n", op_symbol, rslt, rslt, __binstr(rslt)); 
+  printf("%3s(ARG #1)         : 0x%08x | %10u | 0b%32s\n\n", op_symbol, rslt, rslt, __binstr(rslt)); 
 }
 
 /* Main function -------------------------------------------------------------*/
@@ -100,26 +107,30 @@ void print_unary_bitwise_operation(uint32_t arg, uint32_t rslt, char* op_name, c
   */
 int main()
 {
-  { /* Bitwise AND */
+  { 
+    /* Bitwise AND */
     uint32_t arg1 = 0x12345678;
     uint32_t arg2 = 0x91011121 ;  
-    print_binary_bitwise_operation(arg1, arg2, arg1 & arg2, "AND", '&');
+    print_binary_bitwise_operation(arg1, arg2, arg1 & arg2, "Bitwise AND", " & ");
   }
 
-  { /* Bitwise OR */
+  { 
+    /* Bitwise OR */
     uint32_t arg1 = 0x31415161;
     uint32_t arg2 = 0x71819202;
-    print_binary_bitwise_operation(arg1, arg2, arg1 | arg2, "OR", '|');
+    print_binary_bitwise_operation(arg1, arg2, arg1 | arg2, "Bitwise OR", " | ");
   }
    
-  { /* Bitwise XOR */
+  { 
+    /* Bitwise XOR */
     uint32_t arg1 = 0x12223242;
     uint32_t arg2 = 0x52627282; 
-    print_binary_bitwise_operation(arg1, arg2, arg1 ^ arg2, "XOR", '^');
+    print_binary_bitwise_operation(arg1, arg2, arg1 ^ arg2, "Bitwise XOR", " ^ ");
   }
    
-  { /* Bitwise NOT */
+  { 
+    /* Bitwise NOT */
     uint32_t arg1 = 0x93031323;
-    print_unary_bitwise_operation(arg1, ~arg1, "NOT", '~');
+    print_unary_bitwise_operation(arg1, ~arg1, "Bitwise NOT", " ~ ");
   }
 }
