@@ -107,29 +107,25 @@ void print_unary_bitwise_operation(uint32_t arg, uint32_t rslt, char* op_name, c
   */
 int main()
 {
-  { 
-    /* Bitwise AND */
+  { /* Bitwise AND */
     uint32_t arg1 = 0x12345678;
     uint32_t arg2 = 0x91011121 ;  
     print_binary_bitwise_operation(arg1, arg2, arg1 & arg2, "Bitwise AND", " & ");
   }
 
-  { 
-    /* Bitwise OR */
+  { /* Bitwise OR */
     uint32_t arg1 = 0x31415161;
     uint32_t arg2 = 0x71819202;
     print_binary_bitwise_operation(arg1, arg2, arg1 | arg2, "Bitwise OR", " | ");
   }
    
-  { 
-    /* Bitwise XOR */
+  { /* Bitwise XOR */
     uint32_t arg1 = 0x12223242;
     uint32_t arg2 = 0x52627282; 
     print_binary_bitwise_operation(arg1, arg2, arg1 ^ arg2, "Bitwise XOR", " ^ ");
   }
    
-  { 
-    /* Bitwise NOT */
+  { /* Bitwise NOT */
     uint32_t arg1 = 0x93031323;
     print_unary_bitwise_operation(arg1, ~arg1, "Bitwise NOT", " ~ ");
   }

@@ -40,9 +40,9 @@ int unit_test_read_bit(reg_input_func read_bit);
  */
 void reg_set_bit(uint32_t* reg, uint32_t bit)
 {
-/* USER CODE BEGIN: reg_set_bit */
+  /* USER CODE BEGIN: reg_set_bit */
 
-/* USER CODE END: reg_set_bit */
+  /* USER CODE END: reg_set_bit */
 }
 
 /**
@@ -52,9 +52,9 @@ void reg_set_bit(uint32_t* reg, uint32_t bit)
  */
 void reg_reset_bit(uint32_t* reg, uint32_t bit)
 {
-/* USER CODE BEGIN: reg_reset_bit */
+  /* USER CODE BEGIN: reg_reset_bit */
 
-/* USER CODE END: reg_reset_bit */
+  /* USER CODE END: reg_reset_bit */
 }
 
 /**
@@ -64,9 +64,9 @@ void reg_reset_bit(uint32_t* reg, uint32_t bit)
  */
 void reg_toggle_bit(uint32_t* reg, uint32_t bit)
 {
-/* USER CODE BEGIN: reg_toggle_bit */
+  /* USER CODE BEGIN: reg_toggle_bit */
 
-/* USER CODE END: reg_toggle_bit */
+  /* USER CODE END: reg_toggle_bit */
 }
 
 /**
@@ -77,11 +77,11 @@ void reg_toggle_bit(uint32_t* reg, uint32_t bit)
  */
 _Bool reg_read_bit(uint32_t* reg, uint32_t bit)
 {
-_Bool retval;
-/* USER CODE BEGIN: reg_read_bit */
+  _Bool retval;
+  /* USER CODE BEGIN: reg_read_bit */
 
-/* USER CODE END: reg_read_bit */
-return retval;
+  /* USER CODE END: reg_read_bit */
+  return retval;
 }
 
 /* Main function -------------------------------------------------------------*/
@@ -128,7 +128,7 @@ int main()
 /* Unit tests implementation */
 int unit_test_set_bit(reg_output_func set_bit)
 {
-  uint32_t input = 0x00000000;
+  uint32_t input = 0x0000000F;
   uint32_t output = 0xFFFFFFFF;
   for(uint8_t i = 0; i < 32; i++)
     set_bit(&input, i);
@@ -140,7 +140,7 @@ int unit_test_set_bit(reg_output_func set_bit)
 
 int unit_test_reset_bit(reg_output_func reset_bit)
 {
-  uint32_t input = 0xFFFFFFFF;
+  uint32_t input = 0xFFFFFFF0;
   uint32_t output = 0xFFFF0000;
   for(uint8_t i = 0; i < 16; i++)
     reset_bit(&input, i);
