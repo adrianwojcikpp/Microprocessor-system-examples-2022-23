@@ -67,7 +67,7 @@ int main(void)
 
 STATE STATE_MACHINE_StateTransition(INPUT i, STATE s)
 {
-  STATE lookUpTable[][4] = {
+  static const STATE lookUpTable[][4] = {
     /*         a  b  c  d  */
     /* A: */ { A, B, C, A },
     /* B: */ { B, A, C, A },
@@ -79,7 +79,7 @@ STATE STATE_MACHINE_StateTransition(INPUT i, STATE s)
 
 OUTPUT STATE_MACHINE_GetOutput(STATE s)
 {
-  OUTPUT lookUpTable[] = { 
+  static const OUTPUT lookUpTable[] = { 
     /* A: */ alpha, 
     /* B: */ beta, 
     /* C: */ gamma 
