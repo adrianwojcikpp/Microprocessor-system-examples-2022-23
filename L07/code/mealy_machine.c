@@ -3,7 +3,7 @@
   * @file    mealy_machine_test.c
   * @author  AW           Adrian.Wojcik@put.poznan.pl
   * @version 1.1
-  * @date    21-Apr-2021
+  * @date    24-Apr-2023
   * @brief   Mealy machine C implementation example
   *
   ******************************************************************************
@@ -11,6 +11,7 @@
   
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
+#include <string.h>
 
 /* Typedef -------------------------------------------------------------------*/
 typedef enum { a, b, c, d, none } INPUT;                     	//! Input symbols type
@@ -43,16 +44,48 @@ OUTPUT STATE_MACHINE_GetOutput(INPUT i, STATE s);
  */
 void print_state_machine(INPUT i, OUTPUT o, STATE s);
 
+/**
+ * @brief Converts ASCII character to input symbol.
+ * @param[in] c : ASCII character: 'a', 'b', 'c' or 'd'.
+ * @return Input symbol  
+ */
+static inline INPUT ascii2input(char c);
+
+/**
+ * @brief Reads input sequence from C-string.
+ * @param[in]  input_str : C-string with input sequence
+ * @param[out] input_seq : Array of inputs symbols to be filled
+ * @param[in]  input_seq_max_len : Length of array
+ * @return User input sequence length. 
+ */
+int read_input(const char *input_str, INPUT *input_seq, int input_seq_max_len);
+
 /* Entry point: main function ------------------------------------------------*/
-int main(void)
+int main(int argc, char* argv[])
 {
   STATE state = A; // Initial state
-  INPUT input[] = { a, d, b, a, c, b, b, c, c, b, d, c, a, d };
-  int input_len = sizeof(input) / sizeof(input[0]);
-  
-  // Logging table header
-  puts(" # | I |   O   | S |");
-  puts("--------------------");
+  INPUT input[32] = {a, b, c, d};
+  int input_len = 4;
+
+  // Reading user input
+  if(argc > 1)
+  {
+    input_len = read_input(argv[1], input, sizeof(input) / sizeof(input[0]));
+  }
+  else
+  {
+    puts("  [No user input]    "); 
+    puts("-------------------- ");
+  }
+
+  if(input_len == 0)
+  {
+    puts("Invalid input sequence."); 
+    puts("  Usage  : ./<executable> \"<text with input sequence>\"");
+    puts("  Example: ./mealy_machine \"a,d,b,a,c,b,b,c,c,b,d,c,a,d\"");
+
+    return 1;
+  }
   
   int i;
   for(i = 0; i < input_len; i++)
@@ -112,4 +145,28 @@ void print_state_machine(INPUT i, OUTPUT o, STATE s)
   
   printf("%2d | %s | %s | %s | \n", ++cnt, 
     _input_names[i], _output_names[o], _state_names[s]);
+}
+
+static inline INPUT ascii2input(char c)
+{
+    if (c >= 'a' && c <= 'd')
+        return (c - 'a');
+    if (c >= 'A' && c <= 'D')
+        return (c - 'a');
+    return none;
+}
+
+int read_input(const char *input_str, INPUT *input_seq, int input_seq_max_len)
+{
+    int k = 0;
+    for(int i = 0; i < strlen(input_str); i++)
+    {
+        INPUT tmp = ascii2input(input_str[i]);
+        if(tmp != none && k < input_seq_max_len) 
+        {
+            input_seq[k] = tmp;
+            k++;
+        }
+    }
+    return k;
 }
