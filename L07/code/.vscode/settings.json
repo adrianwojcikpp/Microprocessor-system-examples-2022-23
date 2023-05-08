@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
         "SUCCESSD"
-    ]
+    ],
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "string.h": "c"
+    }
 }
