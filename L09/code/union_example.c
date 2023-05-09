@@ -30,7 +30,7 @@ typedef union {
 
 typedef union {
   uint8_t raw[sizeof(long double)];
-  long double  fp;
+  long double fp;
 } uint8_to_longdouble;
 
 /* Main function -------------------------------------------------------------*/
