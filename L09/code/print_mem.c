@@ -21,6 +21,12 @@
   char __binstr(name)[size] = {0,};\
   uint32_to_binstr(name, __binstr(name))
 
+/// @brief Common numbers printing routine
+#define __PRINT_NUMBER(L, F) \
+    printf("%s variable / literal: %s \n", L, number_text); \
+    printf("Value [dec]: " F "\n", number); \
+    print_mem( (mem_t*)&number, sizeof(number) )
+
 /**
  * @brief Unsigned integer (8 bits) to C-string.
  * @param[in]  num    Input unsigned 32 bits integer.
@@ -66,32 +72,24 @@ void print_mem(mem_t* mem, size_t mem_len)
 /**
  * @brief Printing integer variable or literal 
  *        as a numeric value and memory content.
- * @param number_text : Input integer number as text
- * @param number : Input integer number as 'int32_t'
+ * @param number_text : Input integer variable name or literal as text
+ * @param number : Input integer number
  */
 void print_int64(const char* number_text, int64_t number) 
 { 
-  printf("Integer (64-bit) variable / literal: %s \n", number_text); 
-  printf("Value [dec]: %lli \n", number); 
-  print_mem( (mem_t*)&number, sizeof(number) ); 
+  __PRINT_NUMBER("Integer (64-bit)", "%lli");
 }
 void print_int32(const char* number_text, int32_t number) 
 { 
-  printf("Integer (32-bit) variable / literal: %s \n", number_text); 
-  printf("Value [dec]: %i \n", number); 
-  print_mem( (mem_t*)&number, sizeof(number) ); 
+  __PRINT_NUMBER("Integer (32-bit)", "%i");
 }
 void print_int16(const char* number_text, int16_t number) 
 { 
-  printf("Integer (16-bit) variable / literal: %s \n", number_text); 
-  printf("Value [dec]: %hi \n", number); 
-  print_mem( (mem_t*)&number, sizeof(number) ); 
+  __PRINT_NUMBER("Integer (16-bit)", "%hi");
 }
 void print_int8(const char* number_text, int8_t number) 
 { 
-  printf("Integer (8-bit) variable / literal: %s \n", number_text); 
-  printf("Value [dec]: %hhi \n", number); 
-  print_mem( (mem_t*)&number, sizeof(number) ); 
+  __PRINT_NUMBER("Integer (8-bit)", "%hhi");
 }
 /* END INTEGER ------------------------------------------------- */
 
@@ -99,25 +97,19 @@ void print_int8(const char* number_text, int8_t number)
 /**
  * @brief Printing single-precision floating point variable or literal 
  *        as a numeric value and memory content.
- * @param number_text : Input floating-point variable or literal as text
+ * @param number_text : Input floating-point variable name or literal as text
  * @param number : Input floating-point number 
  */
 void print_float(const char* number_text, float number)
-{
-  printf("Single precision floating-point variable / literal: %s \n", number_text);
-  printf("Value [dec]: %.15f \n", number);
-  print_mem( (mem_t*)&number, sizeof(number) );   
+{ 
+  __PRINT_NUMBER("Single precision floating-point", "%.15f");
 }
 void print_double(const char* number_text, double number)
 {
-  printf("Double precision floating-point variable / literal: %s \n", number_text);
-  printf("Value [dec]: %.15f \n", number);
-  print_mem( (mem_t*)&number, sizeof(number) );   
+  __PRINT_NUMBER("Double precision floating-point", "%.15ff"); 
 }
 void print_long_double(const char* number_text, long double number)
 {
-  printf("Extended double precision floating-point variable / literal: %s \n", number_text);
-  printf("Value [dec]: %.15Lf \n", number);
-  print_mem( (mem_t*)&number, sizeof(number) );   
+  __PRINT_NUMBER("Extended double precision floating-point", "%.15Lf"); 
 }
 /* END FLOATING-POINT -------------------------------------------*/

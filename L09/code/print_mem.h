@@ -21,8 +21,8 @@ typedef uint8_t mem_t; //!< 8-bits (1 byte) memory location
 /**
  * @brief Printing integer variable or literal 
  *        as a numeric value and memory content.
- * @param number_text : Input integer variable or literal as text
- * @param number : Input integer
+ * @param number_text : Input integer variable name or literal as text
+ * @param number : Input integer number
  */
 void print_int64(const char* number_text, int64_t number);
 void print_int32(const char* number_text, int32_t number);
@@ -34,7 +34,7 @@ void print_int8(const char* number_text, int8_t number);
 /**
  * @brief Printing single-precision floating point variable or literal 
  *        as a numeric value and memory content.
- * @param number_text : Input floating-point variable or literal as text
+ * @param number_text : Input floating-point variable name or literal as text
  * @param number : Input floating-point number 
  */
 void print_float(const char* number_text, float number);
