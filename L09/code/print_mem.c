@@ -23,7 +23,7 @@
 
 /// @brief Common numbers printing routine
 #define __PRINT_NUMBER(L, F) \
-    printf("%s variable / literal: %s \n", L, number_text); \
+    printf(L " variable / literal: %s \n", number_text); \
     printf("Value [dec]: " F "\n", number); \
     print_mem( (mem_t*)&number, sizeof(number) )
 
