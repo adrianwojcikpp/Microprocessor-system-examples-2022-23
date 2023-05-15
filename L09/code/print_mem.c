@@ -106,7 +106,7 @@ void print_float(const char* number_text, float number)
 }
 void print_double(const char* number_text, double number)
 {
-  __PRINT_NUMBER("Double precision floating-point", "%.15ff"); 
+  __PRINT_NUMBER("Double precision floating-point", "%.15f"); 
 }
 void print_long_double(const char* number_text, long double number)
 {
