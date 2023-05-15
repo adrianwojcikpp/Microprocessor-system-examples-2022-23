@@ -12,8 +12,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
 
-/* Typedef -------------------------------------------------------------------*/
+/* Defines -------------------------------------------------------------------*/
+#define SM_INIT(SM) ((SM))->state = ((SM))->init_state
+#define SM_STATE_TRANSITION(SM) ((SM))->state_transition((SM))
+#define SM_OUTPUT(SM) ((SM))->get_output((SM))
 
+/* Typedef -------------------------------------------------------------------*/
 typedef enum { a, b, c, d } INPUT;                      //! Input symbols type
 typedef enum { alpha = 1, beta = 2, gamma = 4, delta = 8 } OUTPUT;           //! Output symbols type
 typedef enum { A, B, C} STATE;                          //! State symbol type
@@ -27,12 +31,12 @@ struct __STATE_MACHINE__ {
   INPUT input;
   OUTPUT output;
   STATE state;
-  STATE_TRANSITION state_transition;
-  GET_OUTPUT get_output;
+  const STATE init_state;
+  const STATE_TRANSITION state_transition;
+  const GET_OUTPUT get_output;
 };
 
 /* Function prototypes -------------------------------------------------------*/
-
 /**
  * @brief State machine state transition function: next state truth table
  * @param[in] sm - pointer to state machine structure
@@ -62,23 +66,25 @@ int main(void)
 {
   INPUT input[] = { a, d, b, a, c, b, b, c, c, b, d, c, a, d };
   
+  // Create state machine instance 
   STATE_MACHINE sm = { 
-    .state = A,
-    .input = input[0],
+    .init_state = A,
     .state_transition = STATE_MACHINE_StateTransition,
     .get_output =  STATE_MACHINE_GetOutput
   };
   
+  // Initialize state machine instance
+  SM_INIT(&sm);
+
   // Logging table header
   printf(" # | I |   O   | S | \n");
   printf("-------------------- \n");
-  
-  int i;
-  for(i = 0; i < (sizeof(input)/sizeof(INPUT)); i++)
+
+  for(int i = 0; i < (sizeof(input)/sizeof(INPUT)); i++)
   {
     sm.input = input[i];
     print_state_machine(&sm);
-    sm.state_transition(&sm);
+    SM_STATE_TRANSITION(&sm);
   }
   print_state_machine(&sm);
   
@@ -138,7 +144,7 @@ void print_state_machine(STATE_MACHINE* sm)
   static int cnt = 0;
   
   INPUT i = sm->input;
-  OUTPUT o = sm->get_output(sm);
+  OUTPUT o = SM_OUTPUT(sm);
   STATE s = sm->state;
   
   printf("%2d | %s | %s | %s | \n", ++cnt, 

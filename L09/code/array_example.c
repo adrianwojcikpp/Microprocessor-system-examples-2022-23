@@ -27,18 +27,18 @@ uint16_t x[10];
   */
 int main(void)
 {
-  uint16_t y[10] = { 0, };
+  uint16_t y[10]; //= { 0 };
   
   printf("First element of array 'x' sizeof(): %llu\n", sizeof(x[0])); // %I64u instead of %llu for Microsoft Visual Studio
   printf("Array 'x' sizeof(): %llu\n", sizeof(x));
   printf("Array 'x' number of elements: %llu\n", array_size(x));
   
   puts("\nGlobal variable 'x'");
-  for(int i = 0; i < 10; i++)
+  for(int i = 0; i < (sizeof(y)/sizeof(y[0])); i++)
     printf("%d,", x[i]);
     
   puts("\nLocal variable 'y'");
-  for(int i = 0; i < 10; i++)
+  for(int i = 0; i < (sizeof(y)/sizeof(y[0])); i++)
     printf("%d,", y[i]);
   
   return 0;

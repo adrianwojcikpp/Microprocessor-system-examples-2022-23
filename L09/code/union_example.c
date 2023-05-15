@@ -65,6 +65,8 @@ int main(void)
     uint8_to_longdouble varB = { .raw = {0x00, 0xF8, 0x28, 0x5C, 0x8F, 0xC2, 0xF5, 0xC8,
 									                       0x00, 0x40, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC} };
     PRINT_VAR( varB.fp );
+    uint8_to_longdouble varC = { .fp = 1233.8766 };
+    PRINT_VAR( varC.fp );
   }
 
   return 0;

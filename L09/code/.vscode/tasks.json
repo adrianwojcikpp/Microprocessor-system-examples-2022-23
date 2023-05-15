@@ -11,7 +11,7 @@
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-DCOLORED_CONSOLE=1",
-                "-std=c18","-Wall", "-pedantic"
+                "-Wall", "-pedantic"
             ],
             "options": {
                 "cwd": "${fileDirname}"
