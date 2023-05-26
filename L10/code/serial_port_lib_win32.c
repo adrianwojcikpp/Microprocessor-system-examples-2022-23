@@ -27,7 +27,7 @@
 /* Typedef -------------------------------------------------------------------*/
 
 /* Define --------------------------------------------------------------------*/
-
+#define USE_TIMEOUT 0
 /* Macro ---------------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
@@ -64,7 +64,10 @@ int SERIAL_PORT_Init(SERIAL_PORT_Handle* handle)
   _Bool Status = GetCommState(*handle, &dcb);
   
   if(!Status)
+  {
+    CloseHandle(*handle);
     return -2; // Can't read current settings
+  }
 
   //  Fill in some DCB values and set the com state: 
   //  9600 bps, 8 data bits, no parity, and 1 stop bit.
@@ -76,8 +79,37 @@ int SERIAL_PORT_Init(SERIAL_PORT_Handle* handle)
   Status = SetCommState(*handle, &dcb);
   
   if(!Status)
+  {
+    CloseHandle(*handle);
     return -3; // Can't write new settings
-  
+  }
+
+#if USE_TIMEOUT
+
+  // Set reading timeout
+  COMMTIMEOUTS timeouts;  // Timeout structure
+  Status = GetCommTimeouts(*handle, &timeouts);
+
+  if(!Status)
+  {
+    CloseHandle(*handle);
+    return -4; // Can't read timeout settings
+  }
+
+  timeouts.ReadIntervalTimeout = 0;              // Maximum time between two characters
+  timeouts.ReadTotalTimeoutMultiplier = 0;       // Multiplier for per-character timeout
+  timeouts.ReadTotalTimeoutConstant = 1000;      // Constant timeout for total read
+
+  Status = SetCommTimeouts(*handle, &timeouts);
+
+  if(!Status)
+  {
+    CloseHandle(*handle);
+    return -5; // Can't write timeout settings
+  }
+
+#endif // USE_TIMEOUT
+
   return 0; // OK
 }
 
@@ -124,7 +156,14 @@ int SERIAL_PORT_ReadLine(SERIAL_PORT_Handle handle, char* str)
   
     if(!Status)
       return -1; // Can't read from port
-  
+
+#if USE_TIMEOUT
+
+    if(rslt == 0)
+      break;
+
+#endif // USE_TIMEOUT 
+
     i++;
    
   } while(str[i-1] != '\r'); // Until 'CR' (Enter)

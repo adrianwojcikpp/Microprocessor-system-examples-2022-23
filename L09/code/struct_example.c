@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-// #pragma pack(1)
+//#pragma pack(2)
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
@@ -22,7 +22,8 @@ typedef struct {
   char c2;
   short int i2;
   double d2;
-} Structure1 /*__attribute__ ((aligned (4)))*/ /*__attribute__((packed))*/;
+  char f;
+} Structure1 __attribute__ ((aligned (16))) /*__attribute__((packed))*/;
 
 typedef struct {
   char c[2];
@@ -40,7 +41,7 @@ typedef struct {
  */
 void print_structure(void* s, int s_size, int alignment)
 {
-  printf("Size of structure': %d B\n", (int)s_size);
+  printf("Size of structure: %d B\n", (int)s_size);
   char* s_bytes = (char*)s;
   for(int i = 0; i < s_size; i++)
   {
