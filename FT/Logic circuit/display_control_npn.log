@@ -1,0 +1,23 @@
+Circuit: * C:\PP\Dydaktyka\MATERIALY\TC_MATERIALY\Microprocessor-systems-exampels\FT\Logic circuit\display_control_npn.asc
+
+Limiting rise time of source v1 to 5e-005
+Limiting fall time of source v1 to 5e-005
+Direct Newton iteration for .op point succeeded.
+
+Date: Mon Jun 06 10:28:38 2022
+Total elapsed time: 0.035 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3132
+traniter = 3103
+tranpoints = 1274
+accept = 1214
+rejected = 60
+matrix size = 14
+fillins = 0
+solver = Normal
+Matrix Compiler1: 582 bytes object code size  0.1/0.1/[0.0]
+Matrix Compiler2: off  [0.1]/0.1/0.1
+
