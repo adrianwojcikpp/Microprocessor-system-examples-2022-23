@@ -69,8 +69,8 @@ _Bool MESSAGE_IsValid(const char* msg)
 int main()
 {
     // User input
-    char msg[] = "101010101\r\n"; // valid input 
-    //char msg[] = "101010101\n\r"; // invalid input 
+    //char msg[] = "101010101\r\n"; // valid input 
+    char msg[] = "101010101\n\r"; // invalid input 
 
     // Print validation results
     printf("User input content: %s\nUser input is %svalid\n", msg, MESSAGE_IsValid(msg) ? "" : "in");

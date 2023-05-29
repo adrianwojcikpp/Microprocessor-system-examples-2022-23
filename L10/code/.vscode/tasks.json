@@ -11,7 +11,7 @@
                 "serial_port_lib_win32.c", // For machine with Windows OS
                 //"serial_port_lib_linux.c", // For machine with Linux OS
                 //"serial_port_lib_rpi.c", // For Raspberry Pi SBC
-                "state_machine.c",
+                //"state_machine.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-std=c18", "-Wall", "-pedantic"
