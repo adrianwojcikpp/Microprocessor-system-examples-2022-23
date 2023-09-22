@@ -147,7 +147,7 @@ void print_and_save_pos(_Bool fcn(unsigned int), unsigned int bits, char* filena
 /**
  * @brief 2-bit number comparator
  * @param[in] x two 2-bit integer input (bits AB and CD)
- * @return 1 if input is valid; 0 otherwise
+ * @return 1 if ...; 0 otherwise
  */
 _Bool two_bit_comparator(unsigned int x) 
 {
