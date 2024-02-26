@@ -4,7 +4,7 @@
   * @author  AW           Adrian.Wojcik@put.poznan.pl
   * @version 1.0
   * @date    01-Mar-2022
-  * @brief   Intruction #01 tasks solution template
+  * @brief   Instruction #01 tasks solution template
   *
   ******************************************************************************
   */
