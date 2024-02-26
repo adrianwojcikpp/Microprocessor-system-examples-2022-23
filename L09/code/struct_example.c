@@ -16,11 +16,11 @@
 
 /* Typedef -------------------------------------------------------------------*/
 typedef struct {
-  char c1 __attribute__ ((aligned (16)));
-  short int i1;
+  char c1 __attribute__ ((aligned (8)));
+  short int i1 __attribute__ ((aligned (8)));
   double d1;
-  char c2;
-  short int i2;
+  char c2 __attribute__ ((aligned (8)));
+  short int i2 __attribute__ ((aligned (8)));
   double d2;
   char c3;
 } Structure1 /*__attribute__((packed))*/;
