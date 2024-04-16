@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    L04_example_01.c
+  * @file    L04_example_02.c
   * @author  AW           Adrian.Wojcik@put.poznan.pl
   * @version 2.0
   * @date    14-Mar-2022
