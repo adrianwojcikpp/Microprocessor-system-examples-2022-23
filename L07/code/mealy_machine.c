@@ -152,7 +152,7 @@ static inline INPUT ascii2input(char c)
     if (c >= 'a' && c <= 'd')
         return (c - 'a');
     if (c >= 'A' && c <= 'D')
-        return (c - 'a');
+        return (c - 'A');
     return none;
 }
 

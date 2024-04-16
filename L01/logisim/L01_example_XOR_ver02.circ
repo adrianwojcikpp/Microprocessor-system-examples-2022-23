@@ -73,6 +73,12 @@
       <a name="selloc" val="bl"/>
       <a name="type" val="n"/>
     </comp>
+    <comp lib="0" loc="(280,300)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="p_xor_q"/>
+      <a name="output" val="true"/>
+    </comp>
     <comp lib="0" loc="(310,130)" name="Transistor">
       <a name="facing" val="south"/>
       <a name="selloc" val="bl"/>
@@ -83,15 +89,7 @@
       <a name="type" val="n"/>
     </comp>
     <comp lib="0" loc="(310,190)" name="Ground"/>
-    <comp lib="0" loc="(310,80)" name="Pull Resistor">
-      <a name="pull" val="1"/>
-    </comp>
-    <comp lib="0" loc="(340,260)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="y"/>
-      <a name="output" val="true"/>
-    </comp>
+    <comp lib="0" loc="(310,90)" name="Power"/>
     <comp lib="0" loc="(50,140)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="p"/>
@@ -115,8 +113,8 @@
     <wire from="(160,200)" to="(210,200)"/>
     <wire from="(160,250)" to="(230,250)"/>
     <wire from="(210,200)" to="(210,210)"/>
-    <wire from="(210,210)" to="(210,260)"/>
-    <wire from="(210,260)" to="(340,260)"/>
+    <wire from="(210,210)" to="(210,300)"/>
+    <wire from="(210,300)" to="(280,300)"/>
     <wire from="(230,140)" to="(230,180)"/>
     <wire from="(230,140)" to="(260,140)"/>
     <wire from="(230,230)" to="(230,250)"/>
@@ -130,7 +128,6 @@
     <wire from="(310,130)" to="(310,140)"/>
     <wire from="(310,140)" to="(310,150)"/>
     <wire from="(310,140)" to="(330,140)"/>
-    <wire from="(310,80)" to="(310,90)"/>
     <wire from="(330,140)" to="(330,250)"/>
     <wire from="(50,140)" to="(160,140)"/>
     <wire from="(50,170)" to="(120,170)"/>
