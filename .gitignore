@@ -16,3 +16,5 @@ L10/code/task1_example.c
 L10/code/task2_example.c
 L10/code/state_machine.h
 L10/code/state_machine.c
+L07/code/mealy_machine_task2_v2.c
+L07/code/moore_machine_task1_v2.c
