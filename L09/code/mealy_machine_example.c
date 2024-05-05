@@ -13,7 +13,7 @@
 #include <stdio.h>
 
 /* Defines -------------------------------------------------------------------*/
-#define SM_INIT(SM) ((SM))->state = ((SM))->init_state
+#define SM_INIT(SM) ((SM))->state = ((SM))->init_state; ((SM))->output = SM_OUTPUT((SM))
 #define SM_STATE_TRANSITION(SM) ((SM))->state_transition((SM))
 #define SM_OUTPUT(SM) ((SM))->get_output((SM))
 
@@ -106,6 +106,7 @@ void STATE_MACHINE_StateTransition(STATE_MACHINE* sm)
   };
   
   sm->state = lookUpTable[s][i];
+  sm->output = SM_OUTPUT(sm);
 }
 
 OUTPUT STATE_MACHINE_GetOutput(STATE_MACHINE* sm)
@@ -142,11 +143,6 @@ void print_state_machine(STATE_MACHINE* sm)
   };
   
   static int cnt = 0;
-  
-  INPUT i = sm->input;
-  OUTPUT o = SM_OUTPUT(sm);
-  STATE s = sm->state;
-  
   printf("%2d | %s | %s | %s | \n", ++cnt, 
-    _input_names[i], _output_names[o], _state_names[s]);
+    _input_names[sm->input], _output_names[sm->output], _state_names[sm->state]);
 }
