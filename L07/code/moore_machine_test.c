@@ -72,7 +72,7 @@ STATE STATE_MACHINE_StateTransition(INPUT i, STATE s)
     /*         a  b  c  d  */
     /* A: */ { A, B, C, A },
     /* B: */ { B, A, C, A },
-    /* B: */ { C, B, A, A }      
+    /* C: */ { C, B, A, A }      
   };
   
   return lookUpTable[s][i];

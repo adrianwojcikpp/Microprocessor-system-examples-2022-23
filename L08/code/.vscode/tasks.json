@@ -11,7 +11,7 @@
 				"${file}", "print_mem.c", 
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe",
-				"-DCOLORED_CONSOLE=0"
+				"-DCOLORED_CONSOLE=1"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

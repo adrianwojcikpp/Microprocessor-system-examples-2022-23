@@ -25,6 +25,8 @@
   */
 int main(void)
 {
+  printf("TIP: Check if %d =/= %d\n\n", 2147483687.0, (int32_t)2147483687.0);
+  
   PRINT_INT32(INT32_MIN);
   PRINT_INT32(INT32_MAX);
   PRINT_INT32(2147483828);
@@ -35,7 +37,7 @@ int main(void)
 
   PRINT_FLOAT(1900.8099);
   PRINT_FLOAT(-1901.1901);
-  PRINT_FLOAT(FLT_MAX);
+  PRINT_FLOAT(FLT_EPSILON);
 
   return 0;
 }
