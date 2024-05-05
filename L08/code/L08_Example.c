@@ -11,6 +11,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
+#include <math.h>   // nextafterf
 #include <float.h>  // FLT constants
 #include <stdint.h> // uint32_t
 #include <limits.h> // INT_MAX etc.
@@ -31,13 +32,17 @@ int main(void)
   PRINT_INT32(INT32_MAX);
   PRINT_INT32(2147483828);
  
+  double dwo_point_one = 2.1;
+ 
   PRINT_Q31(0.32);
   PRINT_Q31(-1);
+  PRINT_Q31(dwo_point_one);
   PRINT_Q31(2.1);
 
   PRINT_FLOAT(1900.8099);
   PRINT_FLOAT(-1901.1901);
   PRINT_FLOAT(FLT_EPSILON);
+  PRINT_FLOAT(nextafterf(1.0f, 2.0f));
 
   return 0;
 }
