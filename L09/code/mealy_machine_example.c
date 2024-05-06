@@ -13,9 +13,10 @@
 #include <stdio.h>
 
 /* Defines -------------------------------------------------------------------*/
-#define SM_INIT(SM) ((SM))->state = ((SM))->init_state; ((SM))->output = SM_OUTPUT((SM))
+#define SM_INIT(SM)             ((SM))->state = ((SM))->init_state;\
+                                ((SM))->output = SM_OUTPUT((SM))
 #define SM_STATE_TRANSITION(SM) ((SM))->state_transition((SM))
-#define SM_OUTPUT(SM) ((SM))->get_output((SM))
+#define SM_OUTPUT(SM)           ((SM))->get_output((SM))
 
 /* Typedef -------------------------------------------------------------------*/
 typedef enum { a, b, c, d } INPUT;                      //! Input symbols type

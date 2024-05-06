@@ -71,7 +71,7 @@ int main(void)
     PRINT_STRUCT(s1);
   }
 
-    { // Structure 2 Example
+  { // Structure 2 Example
     Structure2 s = { {'a', 'b'}, {1, 2}, {1.0, 2.0} };
     //PRINT_STRUCT(s);
     PRINT_STRUCT(s2);
