@@ -34,7 +34,7 @@ int main(void)
   printf("Array 'x' number of elements: %llu\n", array_size(x));
   
   puts("\nGlobal variable 'x'");
-  for(int i = 0; i < (sizeof(y)/sizeof(y[0])); i++)
+  for(int i = 0; i < (sizeof(x)/sizeof(x[0])); i++)
     printf("%d,", x[i]);
     
   puts("\nLocal variable 'y'");
