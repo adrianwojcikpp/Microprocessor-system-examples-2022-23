@@ -19,3 +19,7 @@ L10/code/state_machine.c
 L07/code/mealy_machine_task2_v2.c
 L07/code/moore_machine_task1_v2.c
 
+/L11/Embedded application (STM32)/Serial_Port_Example/Debug
+L08/code/L08_Example_01.c
+L08/code/L08_Example_02.c
+L08/code/L08_Example_03.c
