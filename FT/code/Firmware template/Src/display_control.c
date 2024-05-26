@@ -40,6 +40,11 @@ void disp_debug_log(DISP_HandleTypeDef* hdisp);
 void DISP_printDecUInt(DISP_HandleTypeDef* hdisp, unsigned int dec)
 {
 	disp_debug_print(hdisp);
+	
+	/* USER CODE Begin */
+		
+	/* USER CODE End */
+
 	for(int i = 0; i < 8; i++)
 	{
 		/* USER CODE Begin */
