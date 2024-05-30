@@ -67,8 +67,8 @@ void Error_Handler(void);
 #define RMII_REF_CLK_GPIO_Port GPIOA
 #define RMII_MDIO_Pin GPIO_PIN_2
 #define RMII_MDIO_GPIO_Port GPIOA
-#define DISP_3_Pin GPIO_PIN_5
-#define DISP_3_GPIO_Port GPIOA
+#define xDISP_3_Pin GPIO_PIN_5
+#define xDISP_3_GPIO_Port GPIOA
 #define DISP_4_Pin GPIO_PIN_6
 #define DISP_4_GPIO_Port GPIOA
 #define RMII_CRS_DV_Pin GPIO_PIN_7
@@ -79,6 +79,8 @@ void Error_Handler(void);
 #define RMII_RXD1_GPIO_Port GPIOC
 #define LD1_Pin GPIO_PIN_0
 #define LD1_GPIO_Port GPIOB
+#define DISP_3_Pin GPIO_PIN_12
+#define DISP_3_GPIO_Port GPIOF
 #define DISP_H_Pin GPIO_PIN_13
 #define DISP_H_GPIO_Port GPIOF
 #define DISP_E_Pin GPIO_PIN_14

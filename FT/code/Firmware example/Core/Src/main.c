@@ -127,7 +127,7 @@ int main(void)
   DISP_Init(&hdisp1);
 
   // Printing initial value
-  DISP_printDecUInt(&hdisp1, 0);
+  DISP_printDecUInt(&hdisp1, 1234);
 
   // Start serial port
   HAL_UART_Receive_IT(&huart3, (unsigned char*)RX_DATA, MSG_SIZE);

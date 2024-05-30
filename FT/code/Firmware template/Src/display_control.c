@@ -42,18 +42,12 @@ void DISP_printDecUInt(DISP_HandleTypeDef* hdisp, unsigned int dec)
 	disp_debug_print(hdisp);
 	
 	/* USER CODE Begin */
-		
+
 	/* USER CODE End */
 
 	for(int i = 0; i < 8; i++)
 	{
 		/* USER CODE Begin */
-		
-		// TODO: implement required logic 
-		HAL_GPIO_WritePin(hdisp->Port, hdisp->DATA1_Pin,  (i%2));
-		HAL_GPIO_WritePin(hdisp->Port, hdisp->DATA2_Pin, !(i%2));
-		HAL_GPIO_WritePin(hdisp->Port, hdisp->DATA3_Pin,  (i%2));
-		HAL_GPIO_WritePin(hdisp->Port, hdisp->DATA4_Pin, !(i%2));
 		
 		/* USER CODE End */
 		

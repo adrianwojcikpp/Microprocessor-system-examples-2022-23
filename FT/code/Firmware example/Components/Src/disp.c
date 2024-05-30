@@ -46,13 +46,13 @@ inline void disp_write_data(DISP_HandleTypeDef* hdisp, uint8_t data)
 inline void disp_disable_all_digits(DISP_HandleTypeDef* hdisp)
 {
   for(uint8_t i = 0; i < DISP_DIG_NO; i++)
-    HAL_GPIO_WritePin(hdisp->Digit_Ports[i], hdisp->Digit_Pins[i], GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(hdisp->Digit_Ports[i], hdisp->Digit_Pins[i], GPIO_PIN_SET);
 }
 
 inline void disp_enable_digit(DISP_HandleTypeDef* hdisp, uint8_t dig)
 {
   if(dig < DISP_DIG_NO)
-   HAL_GPIO_WritePin(hdisp->Digit_Ports[dig], hdisp->Digit_Pins[dig], GPIO_PIN_SET);
+   HAL_GPIO_WritePin(hdisp->Digit_Ports[dig], hdisp->Digit_Pins[dig], GPIO_PIN_RESET);
 }
 
 inline void disp_enable_decimal_point(DISP_HandleTypeDef* hdisp)
@@ -103,7 +103,7 @@ void DISP_EnableDecimalPoint(DISP_HandleTypeDef* hdisp, DISP_DP_TypeDef dp)
  */
 void DISP_printDecUInt(DISP_HandleTypeDef* hdisp, uint16_t dec)
 {
-  char dec_str[5] = { 0, };
+  char dec_str[16] = { 0, };
   int n = sprintf(dec_str, "%4u", dec);
   if(n == DISP_DIG_NO)
   {

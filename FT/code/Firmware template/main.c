@@ -28,7 +28,7 @@ int main(void)
 	
 	/* USER CODE Begin */
 	// TODO: add more test cases	
-	DISP_printDecUInt(&hdisp1, 1234);
+	DISP_printDecUInt(&hdisp1, 9876);
 	/* USER CODE End */
 	
 	logfile_deinit();
