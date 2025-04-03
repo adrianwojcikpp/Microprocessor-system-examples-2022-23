@@ -20,7 +20,7 @@
 
 /* Typedef -------------------------------------------------------------------*/
 typedef void (*reg_output_func)(uint32_t*, uint32_t);
-typedef bool (*reg_input_func)(uint32_t*, uint32_t);
+typedef bool (*reg_input_func)(const uint32_t*, uint32_t);
 
 /* Global variables ----------------------------------------------------------*/
 
@@ -76,7 +76,7 @@ void reg_toggle_bit(uint32_t* reg, uint32_t bit)
  * @param[in] bit Bit number to read [0-31]
  * @return Selected bit value [0/1]
  */
-bool reg_read_bit(uint32_t* reg, uint32_t bit)
+bool reg_read_bit(const uint32_t* reg, uint32_t bit)
 {
 bool retval;
 /* USER CODE BEGIN: reg_read_bit */
