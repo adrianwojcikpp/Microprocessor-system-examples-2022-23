@@ -31,7 +31,7 @@
  */
 void uint32_to_binstr(uint32_t num, char* binstr)
 {
-  for(int i = 0; i < 8*sizeof(num); i++)
+  for(unsigned long int i = 0; i < 8*sizeof(num); i++)
   {
     #if COLORED_CONSOLE 
     memcpy(&binstr[i*10], ((1u << (8*sizeof(num) - 1 - i)) & num) ? "\033[31m1\033[0m" : "\033[32m0\033[0m", 10);
