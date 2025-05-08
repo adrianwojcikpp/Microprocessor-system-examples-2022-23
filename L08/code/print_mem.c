@@ -12,6 +12,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "print_mem.h"
 #include <string.h>
+#include <math.h>  
 
 /// @brief Naming convention: binary string buffer name postfix
 #define __binstr(name) name##_binstr
@@ -89,6 +90,37 @@ void print_q31(const char* number_text, q31_t number)
 /* END FIXED-POINT --------------------------------------------- */
 
 /* BEGIN FLOATING-POINT -----------------------------------------*/
+
+
+/**
+ * @brief Estimate the number of decimal digits needed to represent a float 
+ *        with reasonable precision based on its magnitude.
+ *
+ * This function approximates how many digits after the decimal point are 
+ * needed to preserve the significant digits of a 32-bit IEEE 754 float.
+ * It assumes approximately 7 significant decimal digits of precision.
+ *
+ * @param value The float value to analyze.
+ * @return The estimated number of decimal digits needed after the
+ *         decimal point to preserve precision in formatted output.
+ */
+unsigned int float32_digits(float value) 
+{
+    const unsigned int min_digits = 15;
+    
+    if (value == 0.0f) 
+        return min_digits; 
+        
+    float abs_val = fabsf(value);
+    int magnitude = (int)floorf(log10f(abs_val));
+    int digits_after_decimal = 7 - magnitude - 1;
+    
+    if (digits_after_decimal < min_digits) 
+        digits_after_decimal = min_digits;
+        
+    return digits_after_decimal;
+}
+
 /**
  * @brief Printing single-precision floating point variable or literal 
  *        as a numeric value and memory content.
@@ -98,7 +130,7 @@ void print_q31(const char* number_text, q31_t number)
 void print_float(const char* number_text, float number)
 {
   printf("Floating-point variable / literal: %s \n", number_text);
-  printf("Value [dec]: %0.15f \n", number);
+  printf("Value [dec]: %0.*f \n", float32_digits(number), number);
   print_mem( (mem_t*)&number ); /* Casting 'number' address to  
                                    'mem_t' pointer             */
 }
