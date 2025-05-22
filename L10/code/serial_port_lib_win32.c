@@ -123,7 +123,8 @@ int SERIAL_PORT_DeInit(SERIAL_PORT_Handle handle)
 
 int SERIAL_PORT_WriteString(SERIAL_PORT_Handle handle, char* str)
 {
-  unsigned int rslt, len = (unsigned long)strlen(str);
+  DWORD rslt;
+  unsigned int len = (unsigned long)strlen(str);
   
   _Bool Status = WriteFile(handle,  // Handle to the Serial port
                            str,     // Data to be written to the port
@@ -142,7 +143,7 @@ int SERIAL_PORT_WriteString(SERIAL_PORT_Handle handle, char* str)
  
 int SERIAL_PORT_ReadLine(SERIAL_PORT_Handle handle, char* str)
 {
-  unsigned int rslt;
+  DWORD rslt;
   int i = 0;
   
   do
