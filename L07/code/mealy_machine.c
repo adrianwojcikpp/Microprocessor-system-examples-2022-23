@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    mealy_machine_test.c
+  * @file    mealy_machine.c
   * @author  AW           Adrian.Wojcik@put.poznan.pl
   * @version 1.1
   * @date    24-Apr-2023
