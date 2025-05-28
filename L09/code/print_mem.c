@@ -12,6 +12,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "print_mem.h"
 #include <string.h>
+#include <inttypes.h>
 
 /// @brief Naming convention: binary string buffer name postfix
 #define __binstr(name) name##_binstr
@@ -77,19 +78,19 @@ void print_mem(mem_t* mem, size_t mem_len)
  */
 void print_int64(const char* number_text, int64_t number) 
 { 
-  __PRINT_NUMBER("Integer (64-bit)", "%lli");
+  __PRINT_NUMBER("Integer (64-bit)", "%" PRIi64);
 }
 void print_int32(const char* number_text, int32_t number) 
 { 
-  __PRINT_NUMBER("Integer (32-bit)", "%i");
+  __PRINT_NUMBER("Integer (32-bit)", "%" PRIi32);
 }
 void print_int16(const char* number_text, int16_t number) 
 { 
-  __PRINT_NUMBER("Integer (16-bit)", "%hi");
+  __PRINT_NUMBER("Integer (16-bit)", "%" PRIi16);
 }
 void print_int8(const char* number_text, int8_t number) 
 { 
-  __PRINT_NUMBER("Integer (8-bit)", "%hhi");
+  __PRINT_NUMBER("Integer (8-bit)", "%" PRIi8);
 }
 /* END INTEGER ------------------------------------------------- */
 
