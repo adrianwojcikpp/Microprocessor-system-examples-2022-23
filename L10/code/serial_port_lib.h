@@ -15,7 +15,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 #include <windows.h>
 
@@ -40,7 +40,7 @@
 
 /* Typedef -------------------------------------------------------------------*/
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 typedef HANDLE SERIAL_PORT_Handle; 
 
