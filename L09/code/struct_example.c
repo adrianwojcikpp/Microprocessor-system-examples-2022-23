@@ -9,13 +9,13 @@
   ******************************************************************************
   */
 
-//#pragma pack(2)
+#pragma pack(1)
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
 
 /* Typedef -------------------------------------------------------------------*/
-typedef struct {
+typedef struct /*__attribute__((packed))*/ {
   char c1 __attribute__ ((aligned (2)));
   short int i1 __attribute__ ((aligned (2)));
   double d1;
@@ -23,7 +23,9 @@ typedef struct {
   short int i2 __attribute__ ((aligned (2)));
   double d2;
   char c3;
-} Structure1 /*__attribute__((packed))*/;
+} Structure1; 
+
+#pragma pack()
 
 typedef struct {
   char c[2];
